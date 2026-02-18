@@ -1,17 +1,43 @@
-namespace NewProject.UI
-{
-    internal static class Program
-    {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+using Microsoft.Extensions.DependencyInjection;
+using NewProject.Application.Interfaces;
+using NewProject.Application.Services;
+using NewProject.Domain.Interfaces;
+using NewProject.Infrastructure.Abstraction;
+using NewProject.Infrastructure.Data;
+using NewProject.Infrastructure.Repositorys;
+
+namespace NewProject.UI {
+    internal static class Program {
+
+
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         [STAThread]
-        static void Main()
-        {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+        static void Main() {
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+
+            ServiceProvider = services.BuildServiceProvider();
+
+            var mainForm = ServiceProvider.GetRequiredService<Form1>();
+            System.Windows.Forms.Application.Run(mainForm);
+        }
+
+        private static void ConfigureServices(IServiceCollection services) {
+
+            string connectionString = "Host=localhost;Port=5432;Database=ProjetoVendas;Username=postgres;Password=123";
+
+            services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(connectionString));
+            // Forms
+            services.AddTransient<Form1>();
+
+            // Application
+            services.AddTransient<IClienteService, ClienteService>();
+
+            // Infrastructure
+            services.AddTransient<IClienteRepository, ClienteRepository>();
         }
     }
 }
