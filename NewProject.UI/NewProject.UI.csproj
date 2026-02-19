@@ -18,4 +18,8 @@
     <ProjectReference Include="..\NewProject.Infrastructure\NewProject.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Produto.Ui\" />
+  </ItemGroup>
+
 </Project>
