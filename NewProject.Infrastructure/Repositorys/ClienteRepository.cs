@@ -8,26 +8,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewProject.Infrastructure.Repositorys {
-    public class ClienteRepository : IClienteRepository {
+namespace NewProject.Infrastructure.Repositorys
+{
+    public class ClienteRepository : IClienteRepository
+    {
 
         private readonly IDbConnectionFactory _connectionFactory;
 
-        public ClienteRepository(IDbConnectionFactory connectionFactory) {
+        public ClienteRepository(IDbConnectionFactory connectionFactory)
+        {
             _connectionFactory = connectionFactory;
         }
 
-        public async Task AdicionarAsync(Cliente cliente) {
+        public async Task AdicionarAsync(Cliente cliente)
+        {
 
             using var connection = _connectionFactory.CreateConnection();
 
             using var command = new NpgsqlCommand(@"
                 INSERT INTO clientes
-                (cliente_id, nome, email, telefone)
+                ( nome, email, telefone)
                 VALUES
-                (@id, @nome, @email, @telefone);", connection);
+                (@nome, @email, @telefone);", connection);
 
-            command.Parameters.AddWithValue("@id", cliente.ClienteId);
+            //command.Parameters.AddWithValue("@id", cliente.ClienteId);
             command.Parameters.AddWithValue("@nome", cliente.Nome);
             command.Parameters.AddWithValue("@email", cliente.Email.Valor);
             command.Parameters.AddWithValue("@telefone", cliente.Telefone.Valor);
@@ -35,7 +39,8 @@ namespace NewProject.Infrastructure.Repositorys {
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task AtualizarAsync(Cliente cliente) {
+        public async Task AtualizarAsync(Cliente cliente)
+        {
             using var connection = _connectionFactory.CreateConnection();
 
             using var command = new NpgsqlCommand(@"
@@ -43,7 +48,7 @@ namespace NewProject.Infrastructure.Repositorys {
                 SET nome = @nome,
                     email = @email,
                     telefone = @telefone
-                WHERE cliente_id = @id;", connection);
+                WHERE id = @id;", connection);
 
             command.Parameters.AddWithValue("@id", cliente.ClienteId);
             command.Parameters.AddWithValue("@nome", cliente.Nome);
@@ -53,25 +58,27 @@ namespace NewProject.Infrastructure.Repositorys {
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task ExcluirAsync(Guid clienteId) {
+        public async Task ExcluirAsync(Guid clienteId)
+        {
             using var connection = _connectionFactory.CreateConnection();
 
             using var command = new NpgsqlCommand(@"
                 DELETE FROM clientes
-                WHERE cliente_id = @id;", connection);
+                WHERE id = @id;", connection);
 
             command.Parameters.AddWithValue("@id", clienteId);
 
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task<Cliente?> ObterPorIdAsync(Guid clienteId) {
+        public async Task<Cliente?> ObterPorIdAsync(Guid clienteId)
+        {
             using var connection = _connectionFactory.CreateConnection();
 
             using var command = new NpgsqlCommand(@"
-        SELECT cliente_id, nome, email, telefone
+        SELECT id, nome, email, telefone
         FROM clientes
-        WHERE cliente_id = @id;", connection);
+        WHERE id = @id;", connection);
 
             command.Parameters.AddWithValue("@id", clienteId);
 

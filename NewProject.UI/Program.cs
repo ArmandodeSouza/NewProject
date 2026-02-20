@@ -1,10 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
+using NewProject.Application.Abstraction;
 using NewProject.Application.Interfaces;
 using NewProject.Application.Services;
 using NewProject.Domain.Interfaces;
 using NewProject.Infrastructure.Abstraction;
 using NewProject.Infrastructure.Data;
 using NewProject.Infrastructure.Repositorys;
+using NewProject.Infrastructure.Logging;
 using NewProject.UI.Cliente.Ui;
 using NewProject.UI.Factories;
 using NewProject.UI.UI;
@@ -34,7 +36,7 @@ namespace NewProject.UI
         private static void ConfigureServices(IServiceCollection services)
         {
 
-            string connectionString = "Host=localhost;Port=5432;Database=ProjetoVendas;Username=postgres;Password=123";
+            string connectionString = "Host=localhost;Port=5432;Database=ProjetoVendas;Username=postgres;Password=1234";
 
             services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(connectionString));
 
@@ -50,6 +52,11 @@ namespace NewProject.UI
 
             // Infrastructure
             services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddSingleton<ILogger>(sp =>
+            {
+                var basePath = AppDomain.CurrentDomain.BaseDirectory;
+                return new FileLogger(basePath);
+            });
         }
     }
 }
