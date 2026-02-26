@@ -1,12 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using NewProject.Application.Abstraction;
 using NewProject.Application.Interfaces;
+using NewProject.Application.QueryInterface;
 using NewProject.Application.Services;
 using NewProject.Domain.Interfaces;
 using NewProject.Infrastructure.Abstraction;
 using NewProject.Infrastructure.Data;
-using NewProject.Infrastructure.Repositorys;
 using NewProject.Infrastructure.Logging;
+using NewProject.Infrastructure.QueryImplementation;
+using NewProject.Infrastructure.Repositorys;
 using NewProject.UI.Cliente.Ui;
 using NewProject.UI.Factories;
 using NewProject.UI.UI;
@@ -43,8 +45,10 @@ namespace NewProject.UI
             // Forms
             services.AddTransient<FrmPrincipalMenu>();
             services.AddTransient<FrmClienteCadastro>();
+            services.AddTransient<FrmClientePesquisa>();
 
             services.AddSingleton<IFormFactory, FormFactory>();
+
 
 
             // Application
@@ -52,6 +56,8 @@ namespace NewProject.UI
 
             // Infrastructure
             services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IClienteQuery, ClienteQuery>();
             services.AddSingleton<ILogger>(sp =>
             {
                 var basePath = AppDomain.CurrentDomain.BaseDirectory;

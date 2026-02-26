@@ -125,6 +125,7 @@
             Name = "FrmClienteCadastro";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de Cliente";
+            Load += FrmClienteCadastro_Load;
             ResumeLayout(false);
             PerformLayout();
         }

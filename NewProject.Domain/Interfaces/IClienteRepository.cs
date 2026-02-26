@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewProject.Domain.Interfaces {
-    public interface IClienteRepository {
+namespace NewProject.Domain.Interfaces
+{
+    public interface IClienteRepository
+    {
 
         public Task<Cliente> ObterPorIdAsync(Guid clienteId);
 

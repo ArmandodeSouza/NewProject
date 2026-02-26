@@ -61,6 +61,7 @@
             MenuClientePesquisa.Name = "MenuClientePesquisa";
             MenuClientePesquisa.Size = new Size(180, 22);
             MenuClientePesquisa.Text = "Pesquisar";
+            MenuClientePesquisa.Click += MenuClientePesquisa_Click;
             // 
             // MenuClienteCadastro
             // 

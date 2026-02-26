@@ -29,5 +29,13 @@ namespace NewProject.UI.UI
             using var form = _formFactory.Create<FrmClienteCadastro>();
             form.ShowDialog();
         }
+
+        private void MenuClientePesquisa_Click(object sender, EventArgs e)
+        {
+
+            using var form = _formFactory.Create<FrmClientePesquisa>();
+            form.ShowDialog();
+
+        }
     }
 }

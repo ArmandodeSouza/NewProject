@@ -5,8 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewProject.Infrastructure.Abstraction {
-    public interface IDbConnectionFactory {
-        NpgsqlConnection CreateConnection();
+namespace NewProject.Infrastructure.Abstraction
+{
+    public interface IDbConnectionFactory
+    {
+        Task<NpgsqlConnection> CreateConnectionAsync();
     }
 }

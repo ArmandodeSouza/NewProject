@@ -14,14 +14,19 @@ namespace NewProject.UI.Cliente.Ui
     public partial class FrmClienteCadastro : Form
     {
 
-
         private readonly IClienteService _clienteService;
+        private readonly Guid? _clienteId;
 
         public FrmClienteCadastro(IClienteService clienteService)
         {
             InitializeComponent();
-
             _clienteService = clienteService;
+        }
+
+        public FrmClienteCadastro(IClienteService clienteService, Guid clienteId) : this(clienteService)
+        {
+
+            _clienteId = clienteId;
         }
 
 
@@ -52,23 +57,77 @@ namespace NewProject.UI.Cliente.Ui
 
         private async void btnSalvar_Click(object sender, EventArgs e)
         {
-            var nome = txtNomeCliente.Text;
-            var email = txtEmailCliente.Text;
-            var telefone = mskTelefoneCliente.Text;
 
-            var result = await _clienteService.AdicionarAsync(nome, email, telefone);
 
-            if (!result.Sucesso)
+            if (_clienteId.HasValue)
             {
-                MessageBox.Show(result.Erro, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var result = await _clienteService.AtualizarAsync(_clienteId.Value, txtNomeCliente.Text, txtEmailCliente.Text, mskTelefoneCliente.Text);
 
+                if (!result.Sucesso)
+                {
+                    MessageBox.Show(result.Erro, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    return;
+                }
+
+                MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Close();
+
+            }
+            else
+            {
+                var nome = txtNomeCliente.Text;
+                var email = txtEmailCliente.Text;
+                var telefone = mskTelefoneCliente.Text;
+
+                var result = await _clienteService.AdicionarAsync(nome, email, telefone);
+
+                if (!result.Sucesso)
+                {
+                    MessageBox.Show(result.Erro, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    return;
+                }
+
+                MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Close();
+            }
+
+            DialogResult = DialogResult.OK;
+            Close();
+
+        }
+
+        private async void FrmClienteCadastro_Load(object sender, EventArgs e)
+        {
+
+
+            if (_clienteId.HasValue)
+            {
+                await CarregarClienteAsync(_clienteId.Value);
+            }
+
+        }
+
+        private async Task CarregarClienteAsync(Guid clienteId)
+        {
+            var resultado = await _clienteService.ObterPorIdAsync(clienteId);
+
+            if (!resultado.Sucesso || resultado.Valor == null)
+            {
+                MessageBox.Show("Cliente não encontrado ou erro ao carregar.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                Close();
                 return;
             }
 
-            MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var cliente = resultado.Valor;
 
-            Close();
-
+            txtNomeCliente.Text = cliente.Nome;
+            txtEmailCliente.Text = cliente.Email.ToString();
+            mskTelefoneCliente.Text = cliente.Telefone.ToString();
         }
     }
 }

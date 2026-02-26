@@ -20,5 +20,10 @@ namespace NewProject.UI.Factories
         {
             return _provider.GetRequiredService<T>();
         }
+
+        public T Create<T>(params object[] parameters) where T : Form
+        {
+            return ActivatorUtilities.CreateInstance<T>(_provider, parameters);
+        }
     }
 }

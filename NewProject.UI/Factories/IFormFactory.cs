@@ -9,5 +9,6 @@ namespace NewProject.UI.Factories
     public interface IFormFactory
     {
         T Create<T>() where T : Form;
+        T Create<T>(params object[] parameters) where T : Form;
     }
 }
