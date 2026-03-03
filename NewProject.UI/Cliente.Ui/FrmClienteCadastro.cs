@@ -72,7 +72,9 @@ namespace NewProject.UI.Cliente.Ui
 
                 MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                DialogResult = DialogResult.OK;
                 Close();
+
 
             }
             else
@@ -93,10 +95,8 @@ namespace NewProject.UI.Cliente.Ui
                 MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 Close();
-            }
 
-            DialogResult = DialogResult.OK;
-            Close();
+            }
 
         }
 

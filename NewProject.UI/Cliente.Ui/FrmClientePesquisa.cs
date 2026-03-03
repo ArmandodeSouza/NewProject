@@ -304,7 +304,7 @@ namespace NewProject.UI.Cliente.Ui
             }
         }
 
-        private void btnEditarCliente_Click(object sender, EventArgs e)
+        private async void btnEditarCliente_Click(object sender, EventArgs e)
         {
             var clienteSelecionado = _clienteBindingSource.Current as ClienteGridDto;
 
@@ -315,9 +315,24 @@ namespace NewProject.UI.Cliente.Ui
             }
 
             using var form = _formFactory.Create<FrmClienteCadastro>(clienteSelecionado.ClienteId);
-            form.ShowDialog();
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                await RecarregarPesquisaAtualAsync();
+            }
 
         }
 
+        private async Task RecarregarPesquisaAtualAsync()
+        {
+            var tipo = (TipoPesquisaCliente)cmbTipoPesquisa.SelectedValue;
+
+            if (tipo == TipoPesquisaCliente.Nome)
+                await PesquisaPorNomeAsync();
+            else if (tipo == TipoPesquisaCliente.Data)
+                await PesquisaPorDataAsync();
+            else if (tipo == TipoPesquisaCliente.Periodo)
+                await PesquisaPorPeriodoAsync();
+        }
     }
 }
