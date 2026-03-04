@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NewProject.Domain;
+﻿using NewProject.Domain;
 using NewProject.Domain.Entities;
 
-namespace NewProject.Application.Interfaces {
-    public interface IClienteService {
+namespace NewProject.Application.Interfaces
+{
+    public interface IClienteService
+    {
 
         Task<Result<Cliente>> ObterPorIdAsync(Guid clienteId);
 

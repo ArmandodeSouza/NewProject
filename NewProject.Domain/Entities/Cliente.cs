@@ -10,7 +10,7 @@ namespace NewProject.Domain.Entities
     public class Cliente
     {
 
-        private const string NomeVazio = "O nome do cliente não pode ser vazio.";
+        private const string _nomeVazio = "O nome do cliente não pode ser vazio.";
 
         public Guid ClienteId { get; private set; }
         public string Nome { get; private set; }
@@ -70,7 +70,7 @@ namespace NewProject.Domain.Entities
         private static Result<(string Nome, Email Email, Telefone Telefone)> Validar(string nome, string email, string telefone)
         {
             if (string.IsNullOrWhiteSpace(nome))
-                return Result<(string, Email, Telefone)>.Fail(NomeVazio);
+                return Result<(string, Email, Telefone)>.Fail(_nomeVazio);
 
             var resultadoEmail = Email.Criar(email);
             var resultadoTelefone = Telefone.Criar(telefone);
