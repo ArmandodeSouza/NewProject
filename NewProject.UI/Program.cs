@@ -53,11 +53,13 @@ namespace NewProject.UI
 
             // Application
             services.AddTransient<IClienteService, ClienteService>();
+            services.AddTransient<IProdutoService, ProdutoService>();
 
             // Infrastructure
             services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IClienteQuery, ClienteQuery>();
+
             services.AddSingleton<ILogger>(sp =>
             {
                 var basePath = AppDomain.CurrentDomain.BaseDirectory;

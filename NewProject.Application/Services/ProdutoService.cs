@@ -57,7 +57,7 @@ namespace NewProject.Application.Services
                 if (!resultadoAtualizacao.Sucesso)
                     return Result.Fail(resultadoAtualizacao.Erro);
 
-                await _produtoRepository.AtualizarAsync(produto);
+                await _produtoRepository.AtualizarDadosBasicosAsync(produto);
 
                 return Result.Ok();
             }
@@ -82,7 +82,7 @@ namespace NewProject.Application.Services
                 if (!resultadoAtualizacao.Sucesso)
                     return Result.Fail(resultadoAtualizacao.Erro);
 
-                await _produtoRepository.AtualizarAsync(produto);
+                await _produtoRepository.AtualizarEstoqueAsync(produto);
 
                 return Result.Ok();
             }
@@ -107,7 +107,7 @@ namespace NewProject.Application.Services
                 if (!resultadoAtualizacao.Sucesso)
                     return Result.Fail(resultadoAtualizacao.Erro);
 
-                await _produtoRepository.AtualizarAsync(produto);
+                await _produtoRepository.AtualizarPrecoAsync(produto);
 
                 return Result.Ok();
             }

@@ -13,7 +13,11 @@ namespace NewProject.Domain.Interfaces
 
         public Task AdicionarAsync(Produto produto);
 
-        public Task AtualizarAsync(Produto produto);
+        public Task AtualizarDadosBasicosAsync(Produto produto);
+
+        public Task AtualizarPrecoAsync(Produto produto);
+
+        public Task AtualizarEstoqueAsync(Produto produto);
 
         public Task ExcluirAsync(Guid produtoId);
 

@@ -74,7 +74,7 @@ namespace NewProject.Infrastructure.Repositorys
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task<Cliente> ObterPorIdAsync(Guid clienteId)
+        public async Task<Cliente?> ObterPorIdAsync(Guid clienteId)
         {
             using var connection = await _connectionFactory.CreateConnectionAsync();
 
