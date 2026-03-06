@@ -52,10 +52,10 @@ namespace NewProject.Application.Services
                 if (produto == null)
                     return Result.Fail("Produto não encontrado.");
 
-                var resultadoAtualizacao = produto.AtualizarDadosBasicos(nome, descricao ?? string.Empty);
+                var resultado = produto.AtualizarDadosBasicos(nome, descricao);
 
-                if (!resultadoAtualizacao.Sucesso)
-                    return Result.Fail(resultadoAtualizacao.Erro);
+                if (!resultado.Sucesso)
+                    return Result.Fail(resultado.Erro);
 
                 await _produtoRepository.AtualizarDadosBasicosAsync(produto);
 

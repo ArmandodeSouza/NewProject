@@ -59,14 +59,14 @@
             // MenuClientePesquisa
             // 
             MenuClientePesquisa.Name = "MenuClientePesquisa";
-            MenuClientePesquisa.Size = new Size(180, 22);
+            MenuClientePesquisa.Size = new Size(124, 22);
             MenuClientePesquisa.Text = "Pesquisar";
             MenuClientePesquisa.Click += MenuClientePesquisa_Click;
             // 
             // MenuClienteCadastro
             // 
             MenuClienteCadastro.Name = "MenuClienteCadastro";
-            MenuClienteCadastro.Size = new Size(180, 22);
+            MenuClienteCadastro.Size = new Size(124, 22);
             MenuClienteCadastro.Text = "Cadastrar";
             MenuClienteCadastro.Click += MenuClienteCadastro_Click;
             // 
@@ -80,14 +80,16 @@
             // pesquisarToolStripMenuItem1
             // 
             pesquisarToolStripMenuItem1.Name = "pesquisarToolStripMenuItem1";
-            pesquisarToolStripMenuItem1.Size = new Size(124, 22);
+            pesquisarToolStripMenuItem1.Size = new Size(180, 22);
             pesquisarToolStripMenuItem1.Text = "Pesquisar";
+            pesquisarToolStripMenuItem1.Click += pesquisarToolStripMenuItem1_Click;
             // 
             // cadastrarToolStripMenuItem1
             // 
             cadastrarToolStripMenuItem1.Name = "cadastrarToolStripMenuItem1";
-            cadastrarToolStripMenuItem1.Size = new Size(124, 22);
+            cadastrarToolStripMenuItem1.Size = new Size(180, 22);
             cadastrarToolStripMenuItem1.Text = "Cadastrar";
+            cadastrarToolStripMenuItem1.Click += cadastrarToolStripMenuItem1_Click;
             // 
             // relatóriosToolStripMenuItem
             // 

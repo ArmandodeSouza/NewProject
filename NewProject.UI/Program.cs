@@ -11,6 +11,7 @@ using NewProject.Infrastructure.QueryImplementation;
 using NewProject.Infrastructure.Repositorys;
 using NewProject.UI.Cliente.Ui;
 using NewProject.UI.Factories;
+using NewProject.UI.Produto.UI;
 using NewProject.UI.UI;
 
 namespace NewProject.UI
@@ -46,6 +47,8 @@ namespace NewProject.UI
             services.AddTransient<FrmPrincipalMenu>();
             services.AddTransient<FrmClienteCadastro>();
             services.AddTransient<FrmClientePesquisa>();
+            services.AddTransient<FrmProdutoCadastro>();
+            services.AddTransient<FrmProdutoPesquisa>();
 
             services.AddSingleton<IFormFactory, FormFactory>();
 

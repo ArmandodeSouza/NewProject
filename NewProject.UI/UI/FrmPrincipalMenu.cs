@@ -1,5 +1,6 @@
 ﻿using NewProject.UI.Cliente.Ui;
 using NewProject.UI.Factories;
+using NewProject.UI.Produto.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,6 +37,19 @@ namespace NewProject.UI.UI
             using var form = _formFactory.Create<FrmClientePesquisa>();
             form.ShowDialog();
 
+        }
+
+        private void cadastrarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using var form = _formFactory.Create<FrmProdutoCadastro>();
+            form.ShowDialog();
+
+        }
+
+        private void pesquisarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using var form = _formFactory.Create<FrmProdutoPesquisa>();
+            form.ShowDialog();
         }
     }
 }

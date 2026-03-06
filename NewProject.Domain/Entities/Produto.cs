@@ -83,6 +83,12 @@ namespace NewProject.Domain.Entities
             NomeProduto = nome.Trim();
             Descricao = descricao?.Trim() ?? string.Empty;
 
+            if (NomeProduto == nome && Descricao == descricao)
+                return Result.Ok();
+
+            NomeProduto = nome;
+            Descricao = descricao;
+
             return Result.Ok();
         }
 
