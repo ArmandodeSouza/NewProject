@@ -239,6 +239,7 @@
             Name = "FrmProdutoCadastro";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastro de produto";
+            Load += FrmProdutoCadastro_Load;
             pnlTop.ResumeLayout(false);
             tblTop.ResumeLayout(false);
             tblTop.PerformLayout();

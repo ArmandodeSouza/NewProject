@@ -43,6 +43,8 @@ namespace NewProject.UI
 
             services.AddSingleton<IDbConnectionFactory>(_ => new DbConnectionFactory(connectionString));
 
+            services.AddSingleton<IFormFactory, FormFactory>();
+
             // Forms
             services.AddTransient<FrmPrincipalMenu>();
             services.AddTransient<FrmClienteCadastro>();
@@ -50,7 +52,7 @@ namespace NewProject.UI
             services.AddTransient<FrmProdutoCadastro>();
             services.AddTransient<FrmProdutoPesquisa>();
 
-            services.AddSingleton<IFormFactory, FormFactory>();
+
 
 
 
@@ -62,6 +64,7 @@ namespace NewProject.UI
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IClienteQuery, ClienteQuery>();
+            services.AddTransient<IProdutoQuery, ProdutoQuery>();
 
             services.AddSingleton<ILogger>(sp =>
             {

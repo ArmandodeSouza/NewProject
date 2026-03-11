@@ -20,7 +20,7 @@ namespace NewProject.UI.Cliente.Ui
     public partial class FrmClientePesquisa : Form
     {
 
-        private Dictionary<TipoPesquisaCliente, Action> _acoesPesquisa;
+        private Dictionary<TipoPesquisa, Action> _acoesPesquisa;
         private readonly BindingSource _clienteBindingSource = new();
         private readonly IClienteQuery _clienteQuery;
         private readonly IServiceProvider _serviceProvider;
@@ -48,7 +48,7 @@ namespace NewProject.UI.Cliente.Ui
 
         private void cmbTipoPesquisa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var tipo = (TipoPesquisaCliente)cmbTipoPesquisa.SelectedValue;
+            var tipo = (TipoPesquisa)cmbTipoPesquisa.SelectedValue;
 
             if (_acoesPesquisa.TryGetValue(tipo, out var acao))
                 acao();
@@ -79,9 +79,9 @@ namespace NewProject.UI.Cliente.Ui
         private void InicializarAcoesPesquisa()
         {
             _acoesPesquisa = new(){
-        { TipoPesquisaCliente.Nome, () => MostrarPesquisaPorNome() },
-        { TipoPesquisaCliente.Data, () => MostrarPesquisaPorData(false) },
-        { TipoPesquisaCliente.Periodo, () => MostrarPesquisaPorData(true) }};
+        { TipoPesquisa.Nome, () => MostrarPesquisaPorNome() },
+        { TipoPesquisa.Data, () => MostrarPesquisaPorData(false) },
+        { TipoPesquisa.Periodo, () => MostrarPesquisaPorData(true) }};
 
         }
 
@@ -90,13 +90,13 @@ namespace NewProject.UI.Cliente.Ui
             try
             {
                 Cursor = Cursors.WaitCursor;
-                var tipo = (TipoPesquisaCliente)cmbTipoPesquisa.SelectedValue;
+                var tipo = (TipoPesquisa)cmbTipoPesquisa.SelectedValue;
 
-                if (tipo == TipoPesquisaCliente.Nome)
+                if (tipo == TipoPesquisa.Nome)
                     await PesquisaPorNomeAsync();
-                else if (tipo == TipoPesquisaCliente.Data)
+                else if (tipo == TipoPesquisa.Data)
                     await PesquisaPorDataAsync();
-                else if (tipo == TipoPesquisaCliente.Periodo)
+                else if (tipo == TipoPesquisa.Periodo)
                     await PesquisaPorPeriodoAsync();
 
             }
@@ -132,7 +132,7 @@ namespace NewProject.UI.Cliente.Ui
         private async Task PesquisaPorDataAsync()
         {
             var data = dtPickInicio.Value.Date;
-            if (data > DateTime.Now)
+            if (data > DateTime.UtcNow)
             {
                 MessageBox.Show("A data não pode ser futura.");
                 return;
@@ -234,7 +234,7 @@ namespace NewProject.UI.Cliente.Ui
         private void ConfigurarPesquisaInicial()
         {
 
-            cmbTipoPesquisa.DataSource = Enum.GetValues(typeof(TipoPesquisaCliente));
+            cmbTipoPesquisa.DataSource = Enum.GetValues(typeof(TipoPesquisa));
             cmbTipoPesquisa.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTipoPesquisa.SelectedIndex = 0;
 
@@ -325,13 +325,13 @@ namespace NewProject.UI.Cliente.Ui
 
         private async Task RecarregarPesquisaAtualAsync()
         {
-            var tipo = (TipoPesquisaCliente)cmbTipoPesquisa.SelectedValue;
+            var tipo = (TipoPesquisa)cmbTipoPesquisa.SelectedValue;
 
-            if (tipo == TipoPesquisaCliente.Nome)
+            if (tipo == TipoPesquisa.Nome)
                 await PesquisaPorNomeAsync();
-            else if (tipo == TipoPesquisaCliente.Data)
+            else if (tipo == TipoPesquisa.Data)
                 await PesquisaPorDataAsync();
-            else if (tipo == TipoPesquisaCliente.Periodo)
+            else if (tipo == TipoPesquisa.Periodo)
                 await PesquisaPorPeriodoAsync();
         }
     }

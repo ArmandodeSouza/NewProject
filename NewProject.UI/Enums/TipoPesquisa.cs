@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NewProject.UI.Enums
 {
-    public enum TipoPesquisaCliente
+    public enum TipoPesquisa
     {
 
         Nome = 0,

@@ -192,8 +192,8 @@
             // 
             // lblPesquisaPor
             // 
-            lblPesquisaPor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblPesquisaPor.AutoSize = true;
+            lblPesquisaPor.Dock = DockStyle.Fill;
             lblPesquisaPor.Location = new Point(3, 0);
             lblPesquisaPor.Name = "lblPesquisaPor";
             lblPesquisaPor.Size = new Size(148, 20);
